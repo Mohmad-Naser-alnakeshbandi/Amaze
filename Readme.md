@@ -15,3 +15,11 @@ Game logic:
 --- 
 
 If you touch the water or the lava more than 3 times , you will lose the game. 
+
+-- 
+
+## some images
+
+<img src="./Amaze_lava.png">
+
+<img src="./Amaze_win.png">
