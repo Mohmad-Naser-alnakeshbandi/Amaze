@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="manifest" href="manifest.webmanifest">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <meta name="theme-color" content="#000000" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<title>A moze </title>
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+			background-color: #000000;
+            overflow: hidden;
+		}
+        #canvasArea {
+            margin-left: auto;
+            margin-right: auto;
+            overflow: hidden;
+        }
+
+        
+	</style>
+    <!-- Libs and GDJS core files : -->
+		<script src="libs/jshashtable.js" crossorigin="anonymous"></script>
+	<script src="logger.js" crossorigin="anonymous"></script>
+	<script src="gd.js" crossorigin="anonymous"></script>
+	<script src="libs/rbush.js" crossorigin="anonymous"></script>
+	<script src="AsyncTasksManager.js" crossorigin="anonymous"></script>
+	<script src="inputmanager.js" crossorigin="anonymous"></script>
+	<script src="jsonmanager.js" crossorigin="anonymous"></script>
+	<script src="timemanager.js" crossorigin="anonymous"></script>
+	<script src="polygon.js" crossorigin="anonymous"></script>
+	<script src="runtimeobject.js" crossorigin="anonymous"></script>
+	<script src="profiler.js" crossorigin="anonymous"></script>
+	<script src="RuntimeInstanceContainer.js" crossorigin="anonymous"></script>
+	<script src="runtimescene.js" crossorigin="anonymous"></script>
+	<script src="scenestack.js" crossorigin="anonymous"></script>
+	<script src="force.js" crossorigin="anonymous"></script>
+	<script src="layer.js" crossorigin="anonymous"></script>
+	<script src="RuntimeSceneLayer.js" crossorigin="anonymous"></script>
+	<script src="timer.js" crossorigin="anonymous"></script>
+	<script src="runtimewatermark.js" crossorigin="anonymous"></script>
+	<script src="runtimegame.js" crossorigin="anonymous"></script>
+	<script src="variable.js" crossorigin="anonymous"></script>
+	<script src="variablescontainer.js" crossorigin="anonymous"></script>
+	<script src="oncetriggers.js" crossorigin="anonymous"></script>
+	<script src="runtimebehavior.js" crossorigin="anonymous"></script>
+	<script src="spriteruntimeobject.js" crossorigin="anonymous"></script>
+	<script src="affinetransformation.js" crossorigin="anonymous"></script>
+	<script src="CustomRuntimeObjectInstanceContainer.js" crossorigin="anonymous"></script>
+	<script src="CustomRuntimeObject.js" crossorigin="anonymous"></script>
+	<script src="events-tools/commontools.js" crossorigin="anonymous"></script>
+	<script src="events-tools/variabletools.js" crossorigin="anonymous"></script>
+	<script src="events-tools/runtimescenetools.js" crossorigin="anonymous"></script>
+	<script src="events-tools/inputtools.js" crossorigin="anonymous"></script>
+	<script src="events-tools/objecttools.js" crossorigin="anonymous"></script>
+	<script src="events-tools/cameratools.js" crossorigin="anonymous"></script>
+	<script src="events-tools/soundtools.js" crossorigin="anonymous"></script>
+	<script src="events-tools/storagetools.js" crossorigin="anonymous"></script>
+	<script src="events-tools/stringtools.js" crossorigin="anonymous"></script>
+	<script src="events-tools/windowtools.js" crossorigin="anonymous"></script>
+	<script src="events-tools/networktools.js" crossorigin="anonymous"></script>
+	<script src="splash/gd-logo-light.js" crossorigin="anonymous"></script>
+	<script src="pixi-renderers/pixi.js" crossorigin="anonymous"></script>
+	<script src="pixi-renderers/pixi-filters-tools.js" crossorigin="anonymous"></script>
+	<script src="pixi-renderers/runtimegame-pixi-renderer.js" crossorigin="anonymous"></script>
+	<script src="pixi-renderers/runtimescene-pixi-renderer.js" crossorigin="anonymous"></script>
+	<script src="pixi-renderers/layer-pixi-renderer.js" crossorigin="anonymous"></script>
+	<script src="pixi-renderers/pixi-image-manager.js" crossorigin="anonymous"></script>
+	<script src="pixi-renderers/pixi-bitmapfont-manager.js" crossorigin="anonymous"></script>
+	<script src="pixi-renderers/spriteruntimeobject-pixi-renderer.js" crossorigin="anonymous"></script>
+	<script src="pixi-renderers/CustomObjectPixiRenderer.js" crossorigin="anonymous"></script>
+	<script src="pixi-renderers/DebuggerPixiRenderer.js" crossorigin="anonymous"></script>
+	<script src="pixi-renderers/loadingscreen-pixi-renderer.js" crossorigin="anonymous"></script>
+	<script src="pixi-renderers/pixi-effects-manager.js" crossorigin="anonymous"></script>
+	<script src="howler-sound-manager/howler.min.js" crossorigin="anonymous"></script>
+	<script src="howler-sound-manager/howler-sound-manager.js" crossorigin="anonymous"></script>
+	<script src="fontfaceobserver-font-manager/fontfaceobserver.js" crossorigin="anonymous"></script>
+	<script src="fontfaceobserver-font-manager/fontfaceobserver-font-manager.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__camerashake__camerashake-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__camerashake__create-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__camerashake__delete-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__camerashake__deleteall-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__camerashake__frequency-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__camerashake__isshaking-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__camerashake__lacunarity-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__camerashake__noise2d-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__camerashake__noise3d-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__camerashake__noise4d-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__camerashake__octaves-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__camerashake__onfirstsceneloaded-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__camerashake__onsceneloaded-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__camerashake__onscenepostevents-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__camerashake__onscenepreevents-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__camerashake__persistence-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__camerashake__seed-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__camerashake__setdefaultrotationamplitude-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__camerashake__setdefaultshakingfrequency-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__camerashake__setdefaulttranslationamplitude-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__camerashake__setdefaultzoomamplitude-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__camerashake__setfrequency-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__camerashake__setlacunarity-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__camerashake__setlayerrotationamplitude-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__camerashake__setlayershakable-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__camerashake__setlayershakingfrequency-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__camerashake__setlayertranslationamplitude-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__camerashake__setlayerzoomamplitude-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__camerashake__setloopperiodx-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__camerashake__setloopperiody-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__camerashake__setoctaves-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__camerashake__setpersistence-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__camerashake__setseed-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__camerashake__shakecamera-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__camerashake__startshaking-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__camerashake__stopshaking-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__mousehelper__cursor.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__panelspritebutton__buttonfsm.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__panelspritebutton__panelspritebutton.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__withthreejs__addchild-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__withthreejs__boundingboxcollisionresultnumber-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__withthreejs__boxprojectionfromtiled.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__withthreejs__cameraangle-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__withthreejs__cameraangle_backup-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__withthreejs__cameradirection-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__withthreejs__cameralookat3dobject-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__withthreejs__cameraposition-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__withthreejs__camerarotation-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__withthreejs__change3dtexture-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__withthreejs__changedepthwrite-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__withthreejs__changeopacity-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__withthreejs__changescale-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__withthreejs__changevisibility-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__withthreejs__checkboundingboxcollision-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__withthreejs__checkexistenceof3dobject-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__withthreejs__checkvisibilityof3dobject-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__withthreejs__clear3dscene-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__withthreejs__correct3dcamerarotationwithinlimits-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__withthreejs__correct3dobjectrotationwithinlimits-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__withthreejs__create3daxeshelper-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__withthreejs__create3dbox-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__withthreejs__create3dmodel-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__withthreejs__create3dplane-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__withthreejs__create3dscene-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__withthreejs__create3dsprite-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__withthreejs__detachfromparent-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__withthreejs__distancefrom3dcamerato3dobject-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__withthreejs__distancefrom3dobjectto3dobject-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__withthreejs__linkedcamera.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__withthreejs__load3dmodelfromobj-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__withthreejs__load3dtexture-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__withthreejs__load3dtexturev2-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__withthreejs__lookat3dcamera-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__withthreejs__lookat3dobject-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__withthreejs__move3dcamera-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__withthreejs__move3dobject-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__withthreejs__objectdirection-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__withthreejs__objectopacity-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__withthreejs__objectparent-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__withthreejs__objectposition-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__withthreejs__objectpositiononworld-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__withthreejs__objectrotation-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__withthreejs__objectrotationonworld-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__withthreejs__objectscale-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__withthreejs__onfirstsceneloaded-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__withthreejs__onscenepostevents-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__withthreejs__outputallidstoconsole-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__withthreejs__outputmodelinformationtoconsole-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__withthreejs__planeprojectionfromtiled.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__withthreejs__raycast-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__withthreejs__raycastfrom3dcamera-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__withthreejs__raycastresultcount-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__withthreejs__raycastresultnumber-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__withthreejs__raycastresultstring-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__withthreejs__remove3dobject-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__withthreejs__resolveboundingboxcollision-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__withthreejs__rotate3dcamera-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__withthreejs__rotate3dcameralikehead-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__withthreejs__rotate3dcameraonworld-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__withthreejs__rotate3dobject-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__withthreejs__rotate3dobjectonworld-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__withthreejs__setchildrenidtoscenevariable-func.js" crossorigin="anonymous"></script>
+	<script src="gdjs-evtsext__withthreejs__updateboundingboxhelper-func.js" crossorigin="anonymous"></script>
+	<script src="Extensions/PanelSpriteObject/panelspriteruntimeobject-pixi-renderer.js" crossorigin="anonymous"></script>
+	<script src="Extensions/PanelSpriteObject/panelspriteruntimeobject.js" crossorigin="anonymous"></script>
+	<script src="Extensions/Physics2Behavior/Box2D_v2.3.1_min.wasm.js" crossorigin="anonymous"></script>
+	<script src="Extensions/Physics2Behavior/physics2runtimebehavior.js" crossorigin="anonymous"></script>
+	<script src="Extensions/TextObject/textruntimeobject-pixi-renderer.js" crossorigin="anonymous"></script>
+	<script src="Extensions/TextObject/textruntimeobject.js" crossorigin="anonymous"></script>
+	<script src="Extensions/TiledSpriteObject/tiledspriteruntimeobject-pixi-renderer.js" crossorigin="anonymous"></script>
+	<script src="Extensions/TiledSpriteObject/tiledspriteruntimeobject.js" crossorigin="anonymous"></script>
+	<script src="Extensions/TweenBehavior/shifty.js" crossorigin="anonymous"></script>
+	<script src="Extensions/TweenBehavior/shifty_setup.js" crossorigin="anonymous"></script>
+	<script src="Extensions/TweenBehavior/tweenruntimebehavior.js" crossorigin="anonymous"></script>
+	<script src="code0.js" crossorigin="anonymous"></script>
+	<script src="code1.js" crossorigin="anonymous"></script>
+	<script src="code2.js" crossorigin="anonymous"></script>
+	<script src="code3.js" crossorigin="anonymous"></script>
+	<script src="data.js" crossorigin="anonymous"></script>
+
+
+</head>
+<body>
+
+    
+	<script>
+
+    (function() {
+        //Initialization
+        var game = new gdjs.RuntimeGame(gdjs.projectData, {});
+
+        //Create a renderer
+        game.getRenderer().createStandardCanvas(document.body);
+
+        //Bind keyboards/mouse/touch events
+        game.getRenderer().bindStandardEvents(game.getInputManager(), window, document);
+
+        //Load all assets and start the game
+        game.loadAllAssets(function() {
+            game.startGameLoop();
+        });
+    })();
+
+	</script>
+</body>
+</html>
