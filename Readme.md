@@ -23,3 +23,9 @@ If you touch the water or the lava more than 3 times, you will lose the game.
 <img src="./Amaze_lava.png">
 
 <img src="./Amaze_win.png">
+
+--- 
+
+try it here: https://mohmad-naser-alnakeshbandi.github.io/Amaze/
+
+or on itch.io: https://mohmad-alnakeshbandi.itch.io/a-moz
